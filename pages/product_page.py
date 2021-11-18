@@ -1,3 +1,8 @@
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
@@ -27,3 +32,27 @@ class ProductPage(BasePage):
         added_price = self.browser.find_element(*ProductPageLocators.ADDED_PRODUCT_PRICE)
         assert price.text in added_price.text, "Price no much"
 
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+
+        return True
+
+    def success_message_should_desapear(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE),\
+            "Success message is presented, but should not be"

@@ -14,3 +14,4 @@ class ProductPageLocators:
 
     ADDED_PRODUCT_NAME = (By.XPATH, '//*[@id="messages"]/div[1]/div/strong')
     ADDED_PRODUCT_PRICE = (By.XPATH, '//*[@id="messages"]/div[3]/div/p[1]/strong')
+    SUCCESS_MESSAGE = (By.XPATH, '//div [@class="alertinner "]')
