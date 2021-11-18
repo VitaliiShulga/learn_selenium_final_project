@@ -1,6 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from .locators import BasePageLocators
+from .locators import BasketPageLocators
 import math
 
 
@@ -41,3 +42,8 @@ class BasePage:
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_basket(self):
+        self.browser.find_element(*BasePageLocators.SHOW_BASKET_BUTTON).click()
+
+
