@@ -1,7 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from .locators import BasePageLocators
-from .locators import BasketPageLocators
 import math
 
 
